@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block body %}
+<h1>Sale Details</h1>
+<p>User: {{ sale.user }}</p>
+<p>Total Amount: {{ sale.total_amount }}</p>
+<p>Payment Method: {{ sale.payment_method }}</p>
+<p>Sale Date: {{ sale.sale_date }}</p>
+
+<h2>Products:</h2>
+<ul>
+{% for detail in sales_details %}
+    <li>{{ detail.product.name }} - {{ detail.quantity_sold }} x {{ detail.price }} = {{ detail.total_price }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'Inventory:sales_list' %}">Back to Sales List</a>
+{% endblock %}

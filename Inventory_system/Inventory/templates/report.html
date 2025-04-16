@@ -1,0 +1,91 @@
+{% extends 'index.html'%}
+{% block body %}
+<h1 class="text-center mb-4">Inventory Report</h1>
+<!-- Products Overview -->
+<section class="mb-5">
+    <h2>Products Overview</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Category</th>
+                    <th>Last Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>${{ product.price }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>
+                        {% if product.category %}
+                            {{ product.category.name }}
+                        {% else %}
+                            Uncategorized
+                        {% endif %}
+                    </td>
+                    <td>{{ product.updated_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+<!-- Sales Summary -->
+<section class="mb-5">
+    <h2>Sales Summary</h2>
+    <div class="alert alert-info">
+        <strong>Total Sales Amount:</strong> ${{ sales_summary.total_sales }}
+    </div>
+</section>
+<!-- Sales by Product -->
+<section class="mb-5">
+    <h2>Sales by Product</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Product Name</th>
+                    <th>Total Quantity Sold</th>
+                    <th>Total Earnings</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detail in sales_details %}
+                <tr>
+                    <td>{{ detail.product__name }}</td>
+                    <td>{{ detail.total_sold }}</td>
+                    <td>${{ detail.total_earnings }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+<!-- Categories Overview -->
+<section>
+    <h2>Categories Overview</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Category Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                <tr>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'index.html'%}
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center">
+        {% if category %}
+            Edit Category
+        {% else %}
+            New Category
+        {% endif %}
+    </h1>
+    
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-center">
+                {% if category %}
+                    Edit Category
+                {% else %}
+                    New Category
+                {% endif %}
+            </h3>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}  
+                <button type="submit" class="btn btn-success">
+                {% if category %}
+                    EDIT 
+                {% else %}
+                    ADD
+                {% endif %}
+                </button>
+                <a href="{% url 'Inventory:category_list' %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

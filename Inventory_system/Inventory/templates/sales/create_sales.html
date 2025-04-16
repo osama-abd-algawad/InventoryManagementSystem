@@ -1,0 +1,24 @@
+{% extends 'index.html'%}
+{% block body %}
+<div class="container mt-5">
+<h1>Create Sale</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Sale Information</legend>
+        {{ sales_form.as_p }}
+    </fieldset>
+    <fieldset>
+        <legend>Sale Details</legend>
+        {{ formset.management_form }}
+        {% for form in formset %}
+            <div class="form-row">
+                {{ form.as_p }}
+            </div>
+        {% endfor %}
+    </fieldset>
+    <button type="submit">Save Sale</button>
+</form>
+</div>
+{% endblock %}

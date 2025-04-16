@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+{% block body%}
+<div class="row">
+    <h1 class="text-center mb-4">Sales List</h1>
+    <a href="{% url "Inventory:create_sales"%}" class="btn btn-success">Add New sale</a>
+    <!-- Sales List -->
+    <ul class="list-group mb-4">
+    {% for sale in sales %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="{% url 'Inventory:sales_detail' sale.id %}" class="text-decoration-none">
+            {{ sale }}
+        </a>
+        <span class="badge bg-primary rounded-pill">
+            {{ sale.total_amount }}
+        </span>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
